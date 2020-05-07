@@ -1,9 +1,9 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { Button } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 
 import Background from '~/components/Background';
 
+import { signOut } from '~/store/modules/auth/actions';
 import { updateProfileRequest } from '~/store/modules/user/actions';
 
 import {
@@ -13,6 +13,7 @@ import {
   Form,
   FormInput,
   SubmitButton,
+  LogoutButton,
 } from './styles';
 
 export default function Profile() {
@@ -46,6 +47,10 @@ export default function Profile() {
         confirmPassword,
       })
     );
+  };
+
+  const handleLogout = () => {
+    dispatch(signOut());
   };
 
   return (
@@ -111,9 +116,8 @@ export default function Profile() {
             value={confirmPassword}
             onChangeText={setConfirmPassword}
           />
-
-          <Button title="Update" onPress={handleSubmit} />
-          {/* <SubmitButton onPress={handleSubmit}>Update Profile</SubmitButton> */}
+          <SubmitButton onPress={handleSubmit}>Update Profile</SubmitButton>
+          <LogoutButton onPress={handleLogout}>Logout</LogoutButton>
         </Form>
       </Container>
     </Background>

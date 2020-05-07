@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -10,6 +11,8 @@ import SignUp from './pages/SignUp';
 
 import Dashboard from './pages/Dashboard';
 import Profile from './pages/Profile';
+
+import ApoointmentRoutes from '~/routes/appointment.routes';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -28,6 +31,11 @@ function Router(isLoggedIn = false) {
             inactiveTintColor: 'rgba(255, 255, 255, 0.6)',
             style: {
               backgroundColor: '#8d41a8',
+              height: 70,
+              paddingBottom: 10,
+              paddingTop: 10,
+              justifyContent: 'center',
+              alignItems: 'center',
             },
           }}
         >
@@ -38,6 +46,17 @@ function Router(isLoggedIn = false) {
               tabBarLabel: 'Appointments',
               tabBarIcon: ({ color }) => (
                 <Icon name="event" color={color} size={20} />
+              ),
+            }}
+          />
+          <Tab.Screen
+            name="New"
+            component={ApoointmentRoutes}
+            options={{
+              unmountOnBlur: true,
+              tabBarLabel: 'Appointment',
+              tabBarIcon: ({ color }) => (
+                <Icon name="add-circle-outline" color={color} size={20} />
               ),
             }}
           />
@@ -69,5 +88,9 @@ function Router(isLoggedIn = false) {
     </NavigationContainer>
   );
 }
+
+Router.propTypes = {
+  color: PropTypes.string.isRequired,
+};
 
 export default Router;
